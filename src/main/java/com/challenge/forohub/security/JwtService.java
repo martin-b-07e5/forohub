@@ -14,11 +14,18 @@ public class JwtService {
 
   @Value("${jwt.secretKey}")
   private String secretKey;
+//  private String secretKey = "Thesecretkeyisplacedhereiftheabovedoesnotwork";
 
-  String issuer = "auth0-vol-med";
+  //  String issuer = "auth0-vol-med";
+  String issuer = "auth0-forohub";
 
   public String generateToken(Usuario usuario) {
     try {
+
+      if (secretKey == null || secretKey.isEmpty()) {
+        throw new IllegalStateException("JWT secret key is empty or null");
+      }
+
       Algorithm signatureAlgorithm = Algorithm.HMAC256(secretKey);
       return com.auth0.jwt.JWT.create()
           .withIssuer(issuer)
@@ -30,7 +37,10 @@ public class JwtService {
 
     } catch (JWTCreationException exception) {
       // Invalid Signing configuration / Couldn't convert Claims.
-      throw new RuntimeException(exception.getMessage());
+//      throw new RuntimeException(exception.getMessage());
+      throw new RuntimeException("Error creating JWT: " + exception.getMessage(), exception);
+    } catch (IllegalStateException exception) {
+      throw new RuntimeException("Error con JWT: " + exception.getMessage(), exception);
     }
   }
 
@@ -59,5 +69,6 @@ public class JwtService {
       return null; // Or handle the exception as needed
     }
   }
+
 
 }

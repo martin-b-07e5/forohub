@@ -46,22 +46,22 @@ public class Usuario implements UserDetails {
   @Column()
   private LocalDateTime updatedAt;
 
-  @Override
-  public String getUsername() {
-    return username;
-  }
-
-  @Override
-  public String getPassword() {
-    return password;
-  }
+//  @Override
+//  public String getUsername() {
+//    return username;
+//  }
+//
+//  @Override
+//  public String getPassword() {
+//    return password;
+//  }
 
 //  ----------------------------------------------------------------
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return roles.stream()
-        .map(SimpleGrantedAuthority::new)
+        .map(role -> new SimpleGrantedAuthority(role))
         .collect(Collectors.toList());
   }
 
