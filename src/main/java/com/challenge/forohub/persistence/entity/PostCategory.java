@@ -1,5 +1,6 @@
 package com.challenge.forohub.persistence.entity;
 
+import com.challenge.forohub.persistence.entity.Category.Category;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

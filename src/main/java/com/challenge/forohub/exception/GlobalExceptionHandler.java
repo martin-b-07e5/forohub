@@ -22,45 +22,60 @@ public class GlobalExceptionHandler {
   @Autowired
   private HttpServletRequest request;
 
+
+  @ExceptionHandler(NameAlreadyInUseException.class)
+  public ResponseEntity<Map<String, Object>> handleNameAlreadyInUse(NameAlreadyInUseException ex) {
+    // Crear el mapa de respuesta
+    Map<String, Object> response = new HashMap<>();
+    response.put("timestamp", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+    response.put("status", HttpStatus.FORBIDDEN.value());
+    response.put("error", "Forbidden");
+    response.put("message", ex.getMessage());
+
+    // Retornar la respuesta con el código de estado 403 y el mapa como cuerpo
+    return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+  }
+
+
   // Handler for custom validation exception.
-//  @ExceptionHandler(MedicoNotFoundException.class)
-//  public ResponseEntity<Map<String, Object>> handleMedicoNotFoundException(MedicoNotFoundException ex) {
-//    Map<String, Object> response = Map.of(
-//        "1-timestamp", LocalDateTime.now(),
-//        "2-status", HttpStatus.NOT_FOUND.value(),
-//        "3-error", "Not Found",
-//        "4-message", ex.getMessage(),
-//        "5-path", request.getRequestURI()
-//    );
-//
-//    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // Retorna 404 Not Found
-//  }
+/*  @ExceptionHandler(MedicoNotFoundException.class)
+  public ResponseEntity<Map<String, Object>> handleMedicoNotFoundException(MedicoNotFoundException ex) {
+    Map<String, Object> response = Map.of(
+        "1-timestamp", LocalDateTime.now(),
+        "2-status", HttpStatus.NOT_FOUND.value(),
+        "3-error", "Not Found",
+        "4-message", ex.getMessage(),
+        "5-path", request.getRequestURI()
+    );
 
-//  @ExceptionHandler(PatientNotFoundException.class)
-//  public ResponseEntity<Map<String, Object>> handlePatientNotFoundException(PatientNotFoundException ex) {
-//    Map<String, Object> response = Map.of(
-//        "message", ex.getMessage(),
-//        "timestamp", LocalDateTime.now(),
-//        "error", "Not Found",
-//        "path", request.getRequestURI(),
-//        "status", HttpStatus.NOT_FOUND.value()
-//    );
-//
-//    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // Retorna 404 Not Found
-//  }
+    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // Retorna 404 Not Found
+  }*/
 
-//  @ExceptionHandler(NoAvailableDoctorException.class)
-//  public ResponseEntity<Map<String, Object>> handleNoAvailableDoctorException(NoAvailableDoctorException ex) {
-//    Map<String, Object> response = Map.of(
-//        "timestamp", LocalDateTime.now(),
-//        "status", HttpStatus.NOT_FOUND.value(),
-//        "error", "Not Found",
-//        "message", ex.getMessage(),
-//        "path", request.getRequestURI()
-//    );
-//
-//    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-//  }
+/*  @ExceptionHandler(PatientNotFoundException.class)
+  public ResponseEntity<Map<String, Object>> handlePatientNotFoundException(PatientNotFoundException ex) {
+    Map<String, Object> response = Map.of(
+        "message", ex.getMessage(),
+        "timestamp", LocalDateTime.now(),
+        "error", "Not Found",
+        "path", request.getRequestURI(),
+        "status", HttpStatus.NOT_FOUND.value()
+    );
+
+    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // Retorna 404 Not Found
+  }*/
+
+/*  @ExceptionHandler(NoAvailableDoctorException.class)
+  public ResponseEntity<Map<String, Object>> handleNoAvailableDoctorException(NoAvailableDoctorException ex) {
+    Map<String, Object> response = Map.of(
+        "timestamp", LocalDateTime.now(),
+        "status", HttpStatus.NOT_FOUND.value(),
+        "error", "Not Found",
+        "message", ex.getMessage(),
+        "path", request.getRequestURI()
+    );
+
+    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+  }*/
 
 
   // Handler for IllegalStateException

@@ -25,11 +25,11 @@ public class Usuario implements UserDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column()
-  private String name;
+//  @Column()
+//  private String name;
 
-  @Column
-  private String email;
+//  @Column
+//  private String email;
 
   @Column
   private String username;
@@ -40,11 +40,11 @@ public class Usuario implements UserDetails {
   @ElementCollection(fetch = FetchType.EAGER)
   private Set<String> roles; // Example roles: ["ROLE_ADMIN", "ROLE_USER"]
 
-  @Column()
-  private LocalDateTime createdAt;
-
-  @Column()
-  private LocalDateTime updatedAt;
+//  @Column()
+//  private LocalDateTime createdAt;
+//
+//  @Column()
+//  private LocalDateTime updatedAt;
 
 //  @Override
 //  public String getUsername() {

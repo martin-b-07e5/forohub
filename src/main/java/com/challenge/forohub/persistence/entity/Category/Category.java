@@ -1,4 +1,4 @@
-package com.challenge.forohub.persistence.entity;
+package com.challenge.forohub.persistence.entity.Category;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Entity
 @Data
+@Entity
+@Table(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,15 +22,15 @@ public class Category {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, unique = true)
+  @Column
   private String name;
 
-  @Column(nullable = false)
+  @Column
   private String description;
 
   @Column(nullable = false)
   private LocalDateTime createdAt;
 
-  @Column(nullable = false)
+  @Column
   private LocalDateTime updatedAt;
 }

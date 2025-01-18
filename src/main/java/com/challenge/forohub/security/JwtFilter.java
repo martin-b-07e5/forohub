@@ -29,7 +29,7 @@ public class JwtFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
 
     String token = extractToken(request);  // get the token from the header.
-//    System.out.println("\n---------- token: " + token);
+    System.out.println("\n---------- token: " + token);
 
     if (token != null && jwtService.isTokenValid(token)) {
       String username = jwtService.getUsernameFromToken(token);
