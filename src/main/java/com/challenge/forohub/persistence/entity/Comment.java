@@ -1,5 +1,6 @@
 package com.challenge.forohub.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,8 +18,8 @@ import java.time.LocalDateTime;
 public class Comment {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(nullable = false, columnDefinition = "TEXT")
   private String content;
@@ -28,7 +30,7 @@ public class Comment {
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_id", nullable = false)
-  private User user;
+  private Usuario user;
 
   @Column(nullable = false)
   private LocalDateTime createdAt;
