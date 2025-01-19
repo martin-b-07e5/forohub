@@ -2,10 +2,13 @@ package com.challenge.forohub.service;
 
 import com.challenge.forohub.persistence.entity.post.Post;
 import com.challenge.forohub.persistence.entity.post.PostDTO;
+import com.challenge.forohub.persistence.entity.post.PostListadoDTO;
 import com.challenge.forohub.persistence.repository.IPostRepository;
 import com.challenge.forohub.persistence.repository.IUsuarioRepository;
 import com.challenge.forohub.security.Usuario;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -53,4 +56,16 @@ public class PostService {
     // Guardar y devolver el post
     return postRepository.save(post);
   }
+
+
+  /// READ
+  public Page<PostListadoDTO> listarPaginado(Pageable pageable) {
+    // Fetch the page of post from the repository. findAll(pageable) returns a page of entities (Post)
+    Page<Post> medicosPage = postRepository.findAll(pageable);
+
+    // Map the doctors page to a DTOs page
+    return medicosPage.map(PostListadoDTO::new);
+  }
+
+
 }
