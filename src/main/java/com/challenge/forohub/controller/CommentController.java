@@ -1,7 +1,6 @@
 package com.challenge.forohub.controller;
 
-import com.challenge.forohub.persistence.entity.comment.Comment;
-import com.challenge.forohub.persistence.entity.comment.CommentDTO;
+import com.challenge.forohub.persistence.entity.comment.CommentResponseDTO;
 import com.challenge.forohub.service.CommentService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +23,11 @@ public class CommentController {
 
   /// CREATE a new comment
   @PostMapping
-  public ResponseEntity<CommentDTO> createComment(@RequestBody @Valid CommentDTO commentDTO) {
-    CommentDTO comment = commentService.createComment(commentDTO);
-//    URI location = URI.create("/comments/" + comment.getId());
+  public ResponseEntity<CommentResponseDTO> createComment(@RequestBody @Valid CommentResponseDTO commentResponseDTO) {
+    CommentResponseDTO commentResponse = commentService.createComment(commentResponseDTO);
+//    URI location = URI.create("/comments/" + commentResponse.id());
     URI location = URI.create("/comments/"); // No es necesario el ID en este caso
-    return ResponseEntity.created(location).body(comment);
+    return ResponseEntity.created(location).body(commentResponse);
   }
 
 }
