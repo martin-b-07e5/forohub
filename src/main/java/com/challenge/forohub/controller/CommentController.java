@@ -24,9 +24,10 @@ public class CommentController {
 
   /// CREATE a new comment
   @PostMapping
-  public ResponseEntity<Comment> createComment(@RequestBody @Valid CommentDTO commentDTO) {
-    Comment comment = commentService.createComment(commentDTO);
-    URI location = URI.create("/comments/" + comment.getId());
+  public ResponseEntity<CommentDTO> createComment(@RequestBody @Valid CommentDTO commentDTO) {
+    CommentDTO comment = commentService.createComment(commentDTO);
+//    URI location = URI.create("/comments/" + comment.getId());
+    URI location = URI.create("/comments/"); // No es necesario el ID en este caso
     return ResponseEntity.created(location).body(comment);
   }
 

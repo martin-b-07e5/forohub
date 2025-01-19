@@ -27,7 +27,7 @@ public class CommentService {
 
   /// CREATE a new comment
   @Transactional
-  public Comment createComment(CommentDTO commentDTO) {
+  public CommentDTO createComment(CommentDTO commentDTO) {
     // Obtener el post
     Post post = postRepository.findById(commentDTO.postId())
         .orElseThrow(() -> new RuntimeException("Post no encontrado"));
@@ -44,9 +44,16 @@ public class CommentService {
         .createdAt(LocalDateTime.now())
         .build();
 
-    // Guardar y devolver el comentario
-    return commentRepository.save(comment);
-  }
+    // Guardar el comentario
+    commentRepository.save(comment);
 
+//    devolver el comentario
+    return new CommentDTO(
+        comment.getContent(),
+        comment.getPost().getId(),
+        comment.getUser().getId()
+    );
+
+  }
 
 }
