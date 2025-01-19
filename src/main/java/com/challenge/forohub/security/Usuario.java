@@ -1,4 +1,4 @@
-package com.challenge.forohub.persistence.entity;
+package com.challenge.forohub.security;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,12 +24,6 @@ public class Usuario implements UserDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-//  @Column()
-//  private String name;
-
-//  @Column
-//  private String email;
-
   @Column
   private String username;
 
@@ -40,24 +33,7 @@ public class Usuario implements UserDetails {
   @ElementCollection(fetch = FetchType.EAGER)
   private Set<String> roles; // Example roles: ["ROLE_ADMIN", "ROLE_USER"]
 
-//  @Column()
-//  private LocalDateTime createdAt;
-//
-//  @Column()
-//  private LocalDateTime updatedAt;
-
-//  @Override
-//  public String getUsername() {
-//    return username;
-//  }
-//
-//  @Override
-//  public String getPassword() {
-//    return password;
-//  }
-
-//  ----------------------------------------------------------------
-
+  //  ----------------------------------------------------------------
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return roles.stream()
@@ -84,4 +60,5 @@ public class Usuario implements UserDetails {
   public boolean isEnabled() {
     return true; // Cambia según tu lógica de negocio
   }
+
 }

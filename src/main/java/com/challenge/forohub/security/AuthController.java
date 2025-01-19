@@ -1,6 +1,5 @@
 package com.challenge.forohub.security;
 
-import com.challenge.forohub.persistence.entity.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.challenge.forohub.persistence.repository;
 
-import com.challenge.forohub.persistence.entity.Usuario;
+import com.challenge.forohub.security.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

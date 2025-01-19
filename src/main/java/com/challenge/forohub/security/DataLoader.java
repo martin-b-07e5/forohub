@@ -1,6 +1,5 @@
 package com.challenge.forohub.security;
 
-import com.challenge.forohub.persistence.entity.Usuario;
 import com.challenge.forohub.persistence.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
