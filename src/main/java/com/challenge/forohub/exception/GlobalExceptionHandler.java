@@ -38,18 +38,18 @@ public class GlobalExceptionHandler {
 
 
   // Handler for custom validation exception.
-/*  @ExceptionHandler(MedicoNotFoundException.class)
-  public ResponseEntity<Map<String, Object>> handleMedicoNotFoundException(MedicoNotFoundException ex) {
+  @ExceptionHandler(PostNotFoundException.class)
+  public ResponseEntity<Map<String, Object>> handlePostNotFoundException(PostNotFoundException ex) {
     Map<String, Object> response = Map.of(
-        "1-timestamp", LocalDateTime.now(),
-        "2-status", HttpStatus.NOT_FOUND.value(),
-        "3-error", "Not Found",
-        "4-message", ex.getMessage(),
-        "5-path", request.getRequestURI()
+        "timestamp", LocalDateTime.now(),
+        "status", HttpStatus.NOT_FOUND.value(),
+        "error", "Not Found",
+        "message", ex.getMessage(),
+        "path", request.getRequestURI()
     );
 
     return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // Retorna 404 Not Found
-  }*/
+  }
 
 /*  @ExceptionHandler(PatientNotFoundException.class)
   public ResponseEntity<Map<String, Object>> handlePatientNotFoundException(PatientNotFoundException ex) {
