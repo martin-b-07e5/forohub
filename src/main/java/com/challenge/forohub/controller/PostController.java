@@ -52,5 +52,17 @@ public class PostController {
     return postService.listarPaginado(pageable);
   }
 
+  @GetMapping("/{idMedico}")  // Endpoint to get a doctor's details by ID
+//  http://localhost:8080/medicos/57
+  public ResponseEntity<PostDTO> getMedicoById(@PathVariable Long id) {
+    Post post = postService.getPostById(id);  // Fetch the doctor from the service
+    if (post != null) {
+      PostDTO postDTO = new PostDTO(post);  // Map the entity to DTO
+      return ResponseEntity.ok(postDTO);  // Return the doctor's details in the response
+    } else {
+      return ResponseEntity.notFound().build();  // Return 404 if the doctor is not found
+    }
+  }
+
 
 }

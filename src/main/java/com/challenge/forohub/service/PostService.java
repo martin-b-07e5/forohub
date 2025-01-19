@@ -1,5 +1,6 @@
 package com.challenge.forohub.service;
 
+import com.challenge.forohub.exception.PostNotFoundException;
 import com.challenge.forohub.persistence.entity.post.Post;
 import com.challenge.forohub.persistence.entity.post.PostDTO;
 import com.challenge.forohub.persistence.entity.post.PostListadoDTO;
@@ -68,4 +69,8 @@ public class PostService {
   }
 
 
+  public Post getPostById(Long id) {
+    return postRepository.findById(id)
+        .orElseThrow(() -> new PostNotFoundException("Post with ID not found: " + id));
+  }
 }
