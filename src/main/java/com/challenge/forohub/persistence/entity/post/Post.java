@@ -1,5 +1,6 @@
-package com.challenge.forohub.persistence.entity.Post;
+package com.challenge.forohub.persistence.entity.post;
 
+import com.challenge.forohub.persistence.entity.comment.Comment;
 import com.challenge.forohub.security.Usuario;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
@@ -35,7 +36,7 @@ public class Post {
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
-  private CategoriesEnum category; // Aquí usamos el enum
+  private PostCategoriesEnum category; // Aquí usamos el enum
 
   @Column(nullable = false)
   private LocalDateTime createdAt;
@@ -43,4 +44,7 @@ public class Post {
   @Column(nullable = false)
   private LocalDateTime updatedAt;
 
+  // un post puede tener muchos comentarios
+  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Comment> comments;
 }

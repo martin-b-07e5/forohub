@@ -1,7 +1,7 @@
 package com.challenge.forohub.service;
 
-import com.challenge.forohub.persistence.entity.Post.Post;
-import com.challenge.forohub.persistence.entity.Post.PostDTO;
+import com.challenge.forohub.persistence.entity.post.Post;
+import com.challenge.forohub.persistence.entity.post.PostDTO;
 import com.challenge.forohub.persistence.repository.IPostRepository;
 import com.challenge.forohub.persistence.repository.IUsuarioRepository;
 import com.challenge.forohub.security.Usuario;

@@ -1,4 +1,4 @@
-package com.challenge.forohub.persistence.entity.Post;
+package com.challenge.forohub.persistence.entity.post;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -6,6 +6,6 @@ import jakarta.validation.constraints.NotNull;
 public record PostDTO(
     @NotNull String title,
     @NotNull String content,
-    @NotNull CategoriesEnum category // Aquí usamos el enum
+    @NotNull PostCategoriesEnum category // Aquí usamos el enum
 ) {
 }

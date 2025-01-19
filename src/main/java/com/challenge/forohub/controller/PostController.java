@@ -1,7 +1,7 @@
 package com.challenge.forohub.controller;
 
-import com.challenge.forohub.persistence.entity.Post.Post;
-import com.challenge.forohub.persistence.entity.Post.PostDTO;
+import com.challenge.forohub.persistence.entity.post.Post;
+import com.challenge.forohub.persistence.entity.post.PostDTO;
 import com.challenge.forohub.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
