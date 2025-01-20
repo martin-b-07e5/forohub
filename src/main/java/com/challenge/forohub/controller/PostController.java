@@ -1,9 +1,6 @@
 package com.challenge.forohub.controller;
 
-import com.challenge.forohub.persistence.entity.post.Post;
-import com.challenge.forohub.persistence.entity.post.PostDTO;
-import com.challenge.forohub.persistence.entity.post.PostListadoDTO;
-import com.challenge.forohub.persistence.entity.post.PostUpdateDTO;
+import com.challenge.forohub.persistence.entity.post.*;
 import com.challenge.forohub.service.PostService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -32,10 +29,11 @@ public class PostController {
 
   /// CREATE
   @PostMapping
-  public ResponseEntity<Post> createPost(@RequestBody @Valid PostDTO postDTO) {
+  public ResponseEntity<PostResponseDTO> createPost(@RequestBody @Valid PostDTO postDTO) {
     Post post = postService.createPost(postDTO);
     URI location = URI.create("/posts" + post.getId());
-    return ResponseEntity.created(location).body(post);
+//    return ResponseEntity.created(location).body(post);  // full response
+    return ResponseEntity.created(location).body(new PostResponseDTO(post));
   }
 
 
@@ -87,7 +85,8 @@ public class PostController {
   }
 
 
-  /// DELETE http://localhost:8080/posts/{id}
+  /// DELETE
+  // http://localhost:8080/posts/{id}
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deletePost(@PathVariable Long id) {
     postService.deletePost(id);  // Deletes the post from the database

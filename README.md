@@ -4,11 +4,12 @@
 
 ### Entidades
 
-    * User
-    * Comment
-    * Post
+    * usuarios
+    * usuario_roles
+    * comment
+    * post
 
-![img_2.png](img_2.png)
+![img_1.png](src/main/resources/static/ER_Diagram.png)
 
 ## Requerimientos
 
@@ -17,7 +18,6 @@
     * Implementacion de Spring Security
     * Implementacion de JWT
     * Integracion de documentacion en Swagger
-    * Implementacion de rutas Messages and User (Opcional)
 
 ## Pasos Iniciar el Programa
 
@@ -50,4 +50,13 @@ spring.jpa.hibernate.ddl-auto=update
 
 3. Configurar en las variables de entorno en los perfiles de configuracion en IntelliJ IDEA
 
-![img_1.png](img_1.png)
+![img_2.png](src/main/resources/static/environment_variables.png)
+
+## Swagger
+
+![img_3.png](src/main/resources/static/Swagger_UI.png)
+![img.png](src/main/resources/static/Swagger-v3-api-docs.png)
+
+## Insomnia
+
+![img.png](src/main/resources/static/Insomnia.png)
