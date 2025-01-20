@@ -4,6 +4,7 @@ import com.challenge.forohub.exception.PostNotFoundException;
 import com.challenge.forohub.persistence.entity.post.Post;
 import com.challenge.forohub.persistence.entity.post.PostDTO;
 import com.challenge.forohub.persistence.entity.post.PostListadoDTO;
+import com.challenge.forohub.persistence.entity.post.PostUpdateDTO;
 import com.challenge.forohub.persistence.repository.IPostRepository;
 import com.challenge.forohub.persistence.repository.IUsuarioRepository;
 import com.challenge.forohub.security.Usuario;
@@ -31,7 +32,7 @@ public class PostService {
   }
 
 
-  /// CREATE a new post
+  /// CREATE
   @Transactional
   public Post createPost(@Valid PostDTO postDTO) {
     Post post = Post.builder()
@@ -62,15 +63,61 @@ public class PostService {
   /// READ
   public Page<PostListadoDTO> listarPaginado(Pageable pageable) {
     // Fetch the page of post from the repository. findAll(pageable) returns a page of entities (Post)
-    Page<Post> medicosPage = postRepository.findAll(pageable);
+    Page<Post> postPage = postRepository.findAll(pageable);
 
     // Map the doctors page to a DTOs page
-    return medicosPage.map(PostListadoDTO::new);
+    return postPage.map(PostListadoDTO::new);
   }
-
 
   public Post getPostById(Long id) {
     return postRepository.findById(id)
         .orElseThrow(() -> new PostNotFoundException("Post with ID not found: " + id));
+  }
+
+
+  /// UPDATE
+  @Transactional
+  public void updatePost(PostUpdateDTO postUpdateDTO) {
+
+    // Get the post from the DB
+    Post post = postRepository.findById(postUpdateDTO.id())
+        .orElseThrow(() -> new PostNotFoundException("Post with ID not found: " + postUpdateDTO.id()));
+
+    // Update the post's fields
+    if (postUpdateDTO.title() != null) {
+      post.setTitle(postUpdateDTO.title());
+    }
+    if (postUpdateDTO.content() != null) {
+      post.setContent(postUpdateDTO.content());
+    }
+    if (postUpdateDTO.category() != null) {
+      post.setCategory(postUpdateDTO.category());
+    }
+    post.setUpdatedAt(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+
+    // It is not necessary to call save() as the transaction will automatically save the changes.
+//    postRepository.save(post);
+  }
+
+  @Transactional
+  public Post updatePostByUrl(Long id, PostUpdateDTO postUpdateDTO) {
+
+    // Get the post from the DB
+    Post post = postRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("Post not found with id: " + id));
+
+    // Update the post's fields
+    if (postUpdateDTO.title() != null) {
+      post.setTitle(postUpdateDTO.title());
+    }
+    if (postUpdateDTO.content() != null) {
+      post.setContent(postUpdateDTO.content());
+    }
+    if (postUpdateDTO.category() != null) {
+      post.setCategory(postUpdateDTO.category());
+    }
+    post.setUpdatedAt(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)); // Actualizar la fecha de modificación
+
+    return postRepository.save(post);
   }
 }

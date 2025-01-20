@@ -3,6 +3,7 @@ package com.challenge.forohub.controller;
 import com.challenge.forohub.persistence.entity.post.Post;
 import com.challenge.forohub.persistence.entity.post.PostDTO;
 import com.challenge.forohub.persistence.entity.post.PostListadoDTO;
+import com.challenge.forohub.persistence.entity.post.PostUpdateDTO;
 import com.challenge.forohub.service.PostService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -29,13 +30,14 @@ public class PostController {
     this.postService = postService;
   }
 
-  /// CREATE a new post
+  /// CREATE
   @PostMapping
   public ResponseEntity<Post> createPost(@RequestBody @Valid PostDTO postDTO) {
     Post post = postService.createPost(postDTO);
     URI location = URI.create("/posts" + post.getId());
     return ResponseEntity.created(location).body(post);
   }
+
 
   /// READ
   @GetMapping
@@ -64,5 +66,24 @@ public class PostController {
     }
   }
 
+
+  /// UPDATE
+  // PUT http://localhost:8080/posts
+  @PutMapping
+  public ResponseEntity<PostUpdateDTO> updatePost(@RequestBody @Valid PostUpdateDTO postUpdateDTO) {
+    postService.updatePost(postUpdateDTO);  // Updates the post's details in the database
+    Post updatedPost = postService.getPostById(postUpdateDTO.id()); // Fetches the updated post from the DB
+    return ResponseEntity.ok(new PostUpdateDTO(updatedPost));  // Returns the updated post data in the response
+  }
+
+  // PUT http://localhost:8080/posts/{id}
+  @PutMapping("/{id}")
+  public ResponseEntity<PostUpdateDTO> updatePostByUrl(
+      @PathVariable Long id,
+      @RequestBody @Valid PostUpdateDTO postUpdateDTO) {
+
+    Post updatedPost = postService.updatePostByUrl(id, postUpdateDTO); // Fetches the updated post from the DB
+    return ResponseEntity.ok(new PostUpdateDTO(updatedPost));  // Returns the updated post data in the response
+  }
 
 }
