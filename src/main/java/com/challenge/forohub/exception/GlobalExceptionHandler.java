@@ -37,17 +37,16 @@ public class GlobalExceptionHandler {
   }
 
 
-  // Handler for custom validation exception.
+  // Handler for PostNotFoundException (custom validation exception)
   @ExceptionHandler(PostNotFoundException.class)
   public ResponseEntity<Map<String, Object>> handlePostNotFoundException(PostNotFoundException ex) {
     Map<String, Object> response = Map.of(
-        "timestamp", LocalDateTime.now(),
+        "timestamp", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
         "status", HttpStatus.NOT_FOUND.value(),
         "error", "Not Found",
         "message", ex.getMessage(),
         "path", request.getRequestURI()
     );
-
     return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // Retorna 404 Not Found
   }
 
@@ -92,7 +91,7 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(response, HttpStatus.CONFLICT); // Retorna 409 Conflict
   }
 
-  // Handler for ValidationException
+  // Handler for ValidationException (custom validation exception)
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Map<String, Object>> handleValidationException(MethodArgumentNotValidException ex) {
     // Crear una respuesta personalizada

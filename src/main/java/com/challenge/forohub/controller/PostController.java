@@ -86,4 +86,12 @@ public class PostController {
     return ResponseEntity.ok(new PostUpdateDTO(updatedPost));  // Returns the updated post data in the response
   }
 
+
+  /// DELETE http://localhost:8080/posts/{id}
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+    postService.deletePost(id);  // Deletes the post from the database
+    return ResponseEntity.noContent().build();  // Returns 204 No Content status
+  }
+
 }

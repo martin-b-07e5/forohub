@@ -120,4 +120,15 @@ public class PostService {
 
     return postRepository.save(post);
   }
+
+
+  /// DELETE
+  @Transactional
+  public void deletePost(Long id) {
+    if (!postRepository.existsById(id)) {
+      throw new PostNotFoundException("Post not found with ID: " + id);
+    }
+    postRepository.deleteById(id);
+  }
+
 }
